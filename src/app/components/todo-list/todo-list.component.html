@@ -26,5 +26,12 @@
     Todo list is empty... Add a new todo!
   </div>
 
+  <div
+    *ngIf="isFiltered && !filteredTodoList.length"
+    class="m-auto p-6 text-gray-500"
+  >
+    No todos found...
+  </div>
+
   <app-todo-form (addTodoEvent)="addTodo($event)"></app-todo-form>
 </div>
