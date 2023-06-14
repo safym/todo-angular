@@ -21,5 +21,10 @@
       ></app-todo-item>
     </li>
   </ul>
+
+  <div *ngIf="!todoList.length" class="m-auto p-6 text-gray-500">
+    Todo list is empty... Add a new todo!
+  </div>
+
   <app-todo-form (addTodoEvent)="addTodo($event)"></app-todo-form>
 </div>
