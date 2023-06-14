@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Output } from "@angular/core";
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from "@angular/core";
 import { Status, Todo } from "src/app/models/todo";
 import { TodoItem } from "src/app/todo";
 
 @Component({
   selector: "app-todo-form",
   templateUrl: "./todo-form.component.html",
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoFormComponent {
   title: string = "";

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from "@angular/core";
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from "@angular/core";
 import { Status } from "src/app/models/todo";
 
 export interface filterTodoItemsArgs {
@@ -9,6 +9,7 @@ export interface filterTodoItemsArgs {
 @Component({
   selector: "app-filter-form",
   templateUrl: "./filter-form.component.html",
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilterFormComponent {
   titleSubstring: string = "";

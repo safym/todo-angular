@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
 import { Status, Todo } from "src/app/models/todo";
 import { TodoItem } from "src/app/todo";
 
@@ -10,6 +10,7 @@ export interface updateStatusArgs {
 @Component({
   selector: "app-todo-item",
   templateUrl: "./todo-item.component.html",
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoItemComponent {
   @Input() todoItem: TodoItem;

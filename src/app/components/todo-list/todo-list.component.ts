@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { TodoService } from "src/app/services/todo.service";
 import { Todo } from "src/app/models/todo";
 import { updateStatusArgs } from "../todo-item/todo-item.component";
@@ -7,6 +7,7 @@ import { filterTodoItemsArgs } from "../filter-form/filter-form.component";
 @Component({
   selector: "app-todo-list",
   templateUrl: "./todo-list.component.html",
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [TodoService],
 })
 export class TodoListComponent implements OnInit {
