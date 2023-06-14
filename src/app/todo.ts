@@ -6,7 +6,6 @@ export class TodoItem implements Todo {
   public status: Status;
 
   constructor(id: number, title: string, status: Status) {
-    console.log(status)
     this.id = id;
     this.title = title;
     this.status = status;
