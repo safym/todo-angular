@@ -1,6 +1,19 @@
 <div class="bg-white p-6 m-6 rounded-md shadow flex flex-col gap-y-4">
-  <ul>
+  <app-filter-form
+    (filterTodoItemsEvent)="getfilteredTodoItems($event)"
+    (resetFilterEvent)="resetFilter()"
+  ></app-filter-form>
+  <ul *ngIf="!isFiltered">
     <li *ngFor="let todo of todoList">
+      <app-todo-item
+        (deleteTodoEvent)="deleteTodo($event)"
+        (updateTodoEvent)="updateStatusTodo($event)"
+        [todoItem]="todo"
+      ></app-todo-item>
+    </li>
+  </ul>
+  <ul *ngIf="isFiltered">
+    <li *ngFor="let todo of filteredTodoList">
       <app-todo-item
         (deleteTodoEvent)="deleteTodo($event)"
         (updateTodoEvent)="updateStatusTodo($event)"

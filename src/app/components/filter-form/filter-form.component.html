@@ -1,0 +1,37 @@
+<form
+  #addTodo="ngForm"
+  (submit)="onSubmit()"
+  (reset)="onReset()"
+  class="flex gap-x-2"
+>
+  <input
+    type="text"
+    name="text"
+    class="block w-60 p-4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
+    placeholder="Title substring ..."
+    [(ngModel)]="titleSubstring"
+    required
+  />
+  <select
+    [(ngModel)]="status"
+    (change)="changeStatus($event)"
+    name="status"
+    class="block w-f10 p-4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
+  >
+    <option value="normal">normal</option>
+    <option value="important">important</option>
+    <option value="completed">completed</option>
+  </select>
+  <button
+    type="submit"
+    class="flex w-full justify-center rounded-md bg-green-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+  >
+    Filter
+  </button>
+  <button
+    type="reset"
+    class="flex w-full justify-center rounded-md bg-red-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-300"
+  >
+    Reset
+  </button>
+</form>

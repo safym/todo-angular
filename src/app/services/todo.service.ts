@@ -1,28 +1,28 @@
-import { Injectable } from '@angular/core';
-import { Status, Todo } from '../models/todo';
-import { TodoItem } from '../todo';
+import { Injectable } from "@angular/core";
+import { Status, Todo } from "../models/todo";
+import { TodoItem } from "../todo";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class TodoService {
   private todoList: Todo[] = [
     {
       id: 1,
-      title: 'first todo',
+      title: "first todo",
       status: "normal",
     },
     {
       id: 2,
-      title: 'second todo',
+      title: "second todo",
       status: "important",
     },
     {
       id: 3,
-      title: 'third todo',
+      title: "third todo",
       status: "completed",
     },
-  ]
+  ];
 
   getTodoItems(): Todo[] {
     return this.todoList;
@@ -42,5 +42,18 @@ export class TodoService {
 
   updateStatusTodoItem(item: TodoItem, newStatus: Status): void {
     item.status = newStatus;
+  }
+
+  getfilteredTodoItems(titleSubstring: string, status: string): Todo[] {
+    const filteredTodoItems = this.todoList.filter((item) => {
+      const matchSearch = item.title
+        .toLowerCase()
+        .includes(titleSubstring.toLowerCase());
+      const matchStatus = item.status === status;
+
+      return matchSearch && matchStatus;
+    });
+
+    return filteredTodoItems;
   }
 }
