@@ -1,0 +1,31 @@
+<div
+  [ngClass]="{
+    'border-red-200 bg-red-100': todoItem.status === 'important',
+    'border-green-200 bg-green-100': todoItem.status === 'completed'
+  }"
+  class="flex justify-between gap-x-2 p-6 my-2 rounded-md border-solid border-2 border-sky-100"
+>
+  <p [ngClass]="{ 'line-through': todoItem.status === 'completed' }">
+    <span *ngIf="todoItem.status === 'completed'">✅</span>
+    <span *ngIf="todoItem.status === 'important'">❗</span>
+    {{ todoItem.title }}
+  </p>
+  <div class="flex gap-x-4">
+    <select
+      name="status"
+      class="bg-transparent"
+      (change)="updateStatusTodo($event)"
+    >
+      <option value="normal" [selected]="todoItem.status == 'normal'">
+        normal
+      </option>
+      <option value="important" [selected]="todoItem.status == 'important'">
+        important
+      </option>
+      <option value="completed" [selected]="todoItem.status == 'completed'">
+        completed
+      </option>
+    </select>
+    <button (click)="deleteTodo()">❌</button>
+  </div>
+</div>
