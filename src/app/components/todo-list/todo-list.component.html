@@ -1,0 +1,12 @@
+<div class="bg-white p-6 m-6 rounded-md shadow flex flex-col gap-y-4">
+  <ul>
+    <li *ngFor="let todo of todoList">
+      <app-todo-item
+        (deleteTodoEvent)="deleteTodo($event)"
+        (updateTodoEvent)="updateStatusTodo($event)"
+        [todoItem]="todo"
+      ></app-todo-item>
+    </li>
+  </ul>
+  <app-todo-form (addTodoEvent)="addTodo($event)"></app-todo-form>
+</div>
