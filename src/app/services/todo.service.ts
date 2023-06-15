@@ -67,6 +67,6 @@ export class TodoService {
 
     this.filteredTodoList = filteredTodoItems;
 
-    return this.filteredTodoList;
+    return [...this.filteredTodoList];
   }
 }
