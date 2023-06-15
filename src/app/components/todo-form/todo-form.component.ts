@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from "@angular/core";
-import { Status, Todo } from "src/app/models/todo";
+import { Status } from "src/app/models/todo";
 import { TodoItem } from "src/app/todo";
 
 @Component({
@@ -11,7 +11,7 @@ export class TodoFormComponent {
   title: string = "";
   status: Status = "normal";
 
-  @Output() addTodoEvent = new EventEmitter<Todo>();
+  @Output() addTodoEvent = new EventEmitter<TodoItem>();
 
   changeStatus(e: any) {
     this.status = e.target.value;

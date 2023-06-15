@@ -18,7 +18,6 @@ export class FilterFormComponent {
   @Output() filterTodoItemsEvent = new EventEmitter<filterTodoItemsArgs>();
   @Output() resetFilterEvent = new EventEmitter<any>();
 
-
   changeStatus(e: any) {
     this.status = e.target.value;
   }

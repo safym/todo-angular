@@ -3,7 +3,7 @@ import { Status, Todo } from "src/app/models/todo";
 import { TodoItem } from "src/app/todo";
 
 export interface updateStatusArgs {
-  todo: Todo;
+  todo: TodoItem;
   newStatus: Status;
 }
 
@@ -14,7 +14,7 @@ export interface updateStatusArgs {
 })
 export class TodoItemComponent {
   @Input() todoItem: TodoItem;
-  @Output() deleteTodoEvent = new EventEmitter<Todo>();
+  @Output() deleteTodoEvent = new EventEmitter<TodoItem>();
   @Output() updateTodoEvent = new EventEmitter<updateStatusArgs>();
 
   deleteTodo() {
