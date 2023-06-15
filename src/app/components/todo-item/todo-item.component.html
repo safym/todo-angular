@@ -5,10 +5,12 @@
   }"
   class="flex justify-between gap-x-2 p-6 my-2 rounded-md border-solid border-2 border-sky-100"
 >
-  <p [ngClass]="{ 'line-through': todoItem.status === 'completed' }">
-    <span *ngIf="todoItem.status === 'completed'">✅</span>
-    <span *ngIf="todoItem.status === 'important'">❗</span>
-    {{ todoItem.title }}
+  <p>
+    <span *ngIf="todoItem.status === 'completed'"> ✔️ </span>
+    <span *ngIf="todoItem.status === 'important'">❗ </span>
+    <span [ngClass]="{ 'line-through': todoItem.status === 'completed' }">{{
+      todoItem.title
+    }}</span>
   </p>
   <div class="flex gap-x-4">
     <select
