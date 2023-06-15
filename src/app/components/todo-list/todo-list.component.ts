@@ -34,7 +34,7 @@ export class TodoListComponent implements OnInit {
   }
 
   getfilteredTodoItems({ titleSubstring, status }: filterTodoItemsArgs): void {
-    this.filteredTodoList = this.todoService.getfilteredTodoItems(titleSubstring, status);
+    this.filteredTodoList = this.todoService.getfilteredTodoItems({titleSubstring, status});
     this.isFiltered = true;
   }
 

@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Status, Todo } from "../models/todo";
 import { TodoItem } from "../todo";
+import { filterTodoItemsArgs } from "../components/filter-form/filter-form.component";
 
 @Injectable({
   providedIn: "root",
@@ -54,7 +55,7 @@ export class TodoService {
     item.status = newStatus;
   }
 
-  getfilteredTodoItems(titleSubstring: string, status: string): TodoItem[] {
+  getfilteredTodoItems({titleSubstring, status}: filterTodoItemsArgs): TodoItem[] {
     const filteredTodoItems: TodoItem[] = this.todoList.filter((item) => {
       const matchSearch = item.title
         .toLowerCase()
