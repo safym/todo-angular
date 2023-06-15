@@ -6,7 +6,7 @@ import { TodoItem } from "../todo";
   providedIn: "root",
 })
 export class TodoService {
-  private todoList: Todo[] = [
+  private todoList: TodoItem[] = [
     {
       id: 1,
       title: "first todo",
@@ -23,17 +23,27 @@ export class TodoService {
       status: "completed",
     },
   ];
+  private filteredTodoList: TodoItem[] = [];
 
-  getTodoItems(): Todo[] {
+  getTodoItems(): TodoItem[] {
     return this.todoList;
   }
 
-  deleteTodoItem(item: Todo) {
-    const index = this.todoList.indexOf(item);
+  deleteTodoItem(item: TodoItem) {
+    const todoIndex = this.todoList.indexOf(item);
+    const filteredTodoIndex = this.filteredTodoList.indexOf(item);
 
-    if (index !== -1) {
-      this.todoList.splice(index, 1);
+    if (todoIndex !== -1) {
+      this.deleteArrayItem(this.todoList as [], todoIndex);
     }
+
+    if (filteredTodoIndex !== -1) {
+      this.deleteArrayItem(this.filteredTodoList as [], filteredTodoIndex);
+    }
+  }
+
+  private deleteArrayItem(array: [], index: number) {
+    return array.splice(index, 1);
   }
 
   addTodoItem(item: TodoItem) {
@@ -44,8 +54,8 @@ export class TodoService {
     item.status = newStatus;
   }
 
-  getfilteredTodoItems(titleSubstring: string, status: string): Todo[] {
-    const filteredTodoItems = this.todoList.filter((item) => {
+  getfilteredTodoItems(titleSubstring: string, status: string): TodoItem[] {
+    const filteredTodoItems: TodoItem[] = this.todoList.filter((item) => {
       const matchSearch = item.title
         .toLowerCase()
         .includes(titleSubstring.toLowerCase());
@@ -54,6 +64,8 @@ export class TodoService {
       return matchSearch && matchStatus;
     });
 
-    return filteredTodoItems;
+    this.filteredTodoList = filteredTodoItems;
+
+    return this.filteredTodoList;
   }
 }
