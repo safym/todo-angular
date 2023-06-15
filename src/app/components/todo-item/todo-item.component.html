@@ -16,17 +16,12 @@
     <select
       name="status"
       class="bg-transparent"
+      [value]="todoItem.status"
       (change)="updateStatusTodo($event)"
     >
-      <option value="normal" [selected]="todoItem.status == 'normal'">
-        normal
-      </option>
-      <option value="important" [selected]="todoItem.status == 'important'">
-        important
-      </option>
-      <option value="completed" [selected]="todoItem.status == 'completed'">
-        completed
-      </option>
+      <option value="normal">normal</option>
+      <option value="important">important</option>
+      <option value="completed">completed</option>
     </select>
     <button (click)="deleteTodo()">❌</button>
   </div>
