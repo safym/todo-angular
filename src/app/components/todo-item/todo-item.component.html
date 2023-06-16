@@ -3,7 +3,7 @@
     'border-red-200 bg-red-100': todoItem.status === 'important',
     'border-green-200 bg-green-100': todoItem.status === 'completed'
   }"
-  class="flex justify-between gap-x-2 p-6 my-2 rounded-md border-solid border-2 border-sky-100"
+  class="flex justify-between gap-x-2 p-6 my-2 rounded-md border-solid border-2"
 >
   <p>
     <span *ngIf="todoItem.status === 'completed'"> ✔️ </span>
@@ -16,12 +16,17 @@
     <select
       name="status"
       class="bg-transparent"
-      [value]="todoItem.status"
       (change)="updateStatusTodo($event)"
     >
-      <option value="normal">normal</option>
-      <option value="important">important</option>
-      <option value="completed">completed</option>
+      <option value="normal" [selected]="todoItem.status == 'normal'">
+        normal
+      </option>
+      <option value="important" [selected]="todoItem.status == 'important'">
+        important
+      </option>
+      <option value="completed" [selected]="todoItem.status == 'completed'">
+        completed
+      </option>
     </select>
     <button (click)="deleteTodo()">❌</button>
   </div>
