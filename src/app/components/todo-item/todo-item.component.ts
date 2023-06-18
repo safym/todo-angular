@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
-import { Status, Todo } from "src/app/models/todo";
-import { TodoItem } from "src/app/todo";
+import { Status, Todo } from "src/app/models/todo.interface";
+import { TodoItem } from "src/app/models/todo";
 
 export interface updateStatusArgs {
   todo: TodoItem;

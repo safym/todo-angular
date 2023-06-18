@@ -1,8 +1,13 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { TodoService } from "src/app/services/todo.service";
 import { updateStatusArgs } from "../todo-item/todo-item.component";
-import { filterTodoItemsArgs } from "../filter-form/filter-form.component";
-import { TodoItem } from "src/app/todo";
+import { FilterOptions } from "../filter-form/filter-form.component";
+import { TodoItem } from "src/app/models/todo";
+
+export const initialFilterOptions: FilterOptions = {
+  titleSubstring: "",
+  status: null,
+}
 
 @Component({
   selector: "app-todo-list",
@@ -12,8 +17,9 @@ import { TodoItem } from "src/app/todo";
 })
 export class TodoListComponent implements OnInit {
   todoList: TodoItem[] = [];
-  filteredTodoList: TodoItem[] = [];
   isFiltered: boolean = false;
+  filterOptions: FilterOptions = initialFilterOptions;
+  filteredTodoList: TodoItem[] = [];
 
   constructor(private todoService: TodoService) {}
 
@@ -23,22 +29,31 @@ export class TodoListComponent implements OnInit {
 
   deleteTodo(todo: TodoItem): void {
     this.todoService.deleteTodoItem(todo);
+    this.getfilteredTodoItems(this.filterOptions)
   }
 
   addTodo(todo: TodoItem): void {
     this.todoService.addTodoItem(todo);
+
+    if (this.isFiltered) {
+      this.filteredTodoList = this.todoService.getfilteredTodoItems(this.filterOptions);
+    }
   }
 
   updateStatusTodo({ todo, newStatus }: updateStatusArgs): void {
     this.todoService.updateStatusTodoItem(todo, newStatus);
   }
 
-  getfilteredTodoItems({ titleSubstring, status }: filterTodoItemsArgs): void {
-    this.filteredTodoList = this.todoService.getfilteredTodoItems({titleSubstring, status});
+  getfilteredTodoItems(filterOptions: FilterOptions): void {
+    this.filterOptions = filterOptions;
+    this.filteredTodoList = this.todoService.getfilteredTodoItems(filterOptions);
     this.isFiltered = true;
   }
 
   resetFilter() {
-    this.isFiltered = false
+    console.log(this.filterOptions)
+    this.filterOptions = initialFilterOptions;
+    console.log(this.filterOptions)
+    this.isFiltered = false;
   }
 }

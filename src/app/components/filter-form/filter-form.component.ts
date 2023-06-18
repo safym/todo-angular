@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from "@angular/core";
-import { Status } from "src/app/models/todo";
+import { Status } from "src/app/models/todo.interface";
 
-export interface filterTodoItemsArgs {
+export interface FilterOptions {
   titleSubstring: string;
   status: Status;
 }
@@ -13,9 +13,9 @@ export interface filterTodoItemsArgs {
 })
 export class FilterFormComponent {
   titleSubstring: string = "";
-  status: Status = 'normal';
+  status: Status = null;
 
-  @Output() filterTodoItemsEvent = new EventEmitter<filterTodoItemsArgs>();
+  @Output() filterTodoItemsEvent = new EventEmitter<FilterOptions>();
   @Output() resetFilterEvent = new EventEmitter<any>();
 
   changeStatus(e: any) {
@@ -32,6 +32,6 @@ export class FilterFormComponent {
   onReset() {
     this.resetFilterEvent.emit()
     this.titleSubstring = ''
-    this.status = 'normal'
+    this.status = null
   }
 }

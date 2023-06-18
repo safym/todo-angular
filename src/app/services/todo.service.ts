@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
-import { Status, Todo } from "../models/todo";
-import { TodoItem } from "../todo";
-import { filterTodoItemsArgs } from "../components/filter-form/filter-form.component";
+import { Status, Todo } from "../models/todo.interface";
+import { TodoItem } from "../models/todo";
+import { FilterOptions } from "../components/filter-form/filter-form.component";
 
 @Injectable({
   providedIn: "root",
@@ -24,7 +24,6 @@ export class TodoService {
       status: "completed",
     },
   ];
-  private filteredTodoList: TodoItem[] = [];
 
   getTodoItems(): TodoItem[] {
     return this.todoList;
@@ -32,14 +31,9 @@ export class TodoService {
 
   deleteTodoItem(item: TodoItem) {
     const todoIndex = this.todoList.indexOf(item);
-    const filteredTodoIndex = this.filteredTodoList.indexOf(item);
 
     if (todoIndex !== -1) {
       this.deleteArrayItem(this.todoList as [], todoIndex);
-    }
-
-    if (filteredTodoIndex !== -1) {
-      this.deleteArrayItem(this.filteredTodoList as [], filteredTodoIndex);
     }
   }
 
@@ -55,7 +49,7 @@ export class TodoService {
     item.status = newStatus;
   }
 
-  getfilteredTodoItems({titleSubstring, status}: filterTodoItemsArgs): TodoItem[] {
+  getfilteredTodoItems({titleSubstring, status}: FilterOptions): TodoItem[] {
     const filteredTodoItems: TodoItem[] = this.todoList.filter((item) => {
       const matchSearch = item.title
         .toLowerCase()
@@ -65,8 +59,6 @@ export class TodoService {
       return matchSearch && matchStatus;
     });
 
-    this.filteredTodoList = filteredTodoItems;
-
-    return [...this.filteredTodoList];
+    return [...filteredTodoItems];
   }
 }
