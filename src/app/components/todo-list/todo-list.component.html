@@ -27,7 +27,7 @@
   </div>
 
   <div
-    *ngIf="isFiltered && !filteredTodoList.length"
+    *ngIf="isFiltered && !filteredTodoList.length && todoList.length"
     class="m-auto p-6 text-gray-500"
   >
     No todos found...

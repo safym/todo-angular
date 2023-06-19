@@ -29,7 +29,10 @@ export class TodoListComponent implements OnInit {
 
   deleteTodo(todo: TodoItem): void {
     this.todoService.deleteTodoItem(todo);
-    this.getfilteredTodoItems(this.filterOptions)
+    
+    if (this.isFiltered) {
+      this.filteredTodoList = this.todoService.getfilteredTodoItems(this.filterOptions);
+    }
   }
 
   addTodo(todo: TodoItem): void {
