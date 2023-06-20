@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from "@angular/core";
 import { TodoService } from "src/app/services/todo.service";
 import { updateStatusArgs } from "../todo-item/todo-item.component";
 import { FilterOptions } from "../filter-form/filter-form.component";

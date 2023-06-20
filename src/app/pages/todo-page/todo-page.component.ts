@@ -1,9 +1,7 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'todo-home-page',
-  templateUrl: './todo-page.component.html',
+  selector: "todo-home-page",
+  templateUrl: "./todo-page.component.html",
 })
-export class TodoPageComponent {
-
-}
+export class TodoPageComponent {}

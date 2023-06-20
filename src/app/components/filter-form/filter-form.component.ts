@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Output,
+} from "@angular/core";
 import { Status } from "src/app/models/todo.interface";
 
 export interface FilterOptions {
@@ -30,8 +35,8 @@ export class FilterFormComponent {
   }
 
   onReset() {
-    this.resetFilterEvent.emit()
-    this.titleSubstring = ''
-    this.status = null
+    this.resetFilterEvent.emit();
+    this.titleSubstring = "";
+    this.status = null;
   }
 }

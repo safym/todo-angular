@@ -1,4 +1,10 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import { Status, Todo } from "src/app/models/todo.interface";
 import { TodoItem } from "src/app/models/todo";
 
