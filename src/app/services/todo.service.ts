@@ -17,7 +17,11 @@ export class TodoService {
     return this._todoList;
   }
 
-  loadTodoList(): Observable<any> {
+  set todoList(todoList: TodoItem[]) {
+    this._todoList = todoList;
+  }
+
+  loadTodoList() {
     const headers = new HttpHeaders().set("Content-Type", "application/json");
 
     return this.http.get(`/assets/data/todo.json`, {

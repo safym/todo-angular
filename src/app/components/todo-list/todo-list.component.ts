@@ -21,10 +21,11 @@ export const initialFilterOptions: FilterOptions = {
   providers: [TodoService],
 })
 export class TodoListComponent implements OnInit {
-  todoList: TodoItem[] = [];
-  isFiltered: boolean = false;
-  filterOptions: FilterOptions = initialFilterOptions;
-  filteredTodoList: TodoItem[] = [];
+  public todoList: TodoItem[] = [];
+  public isFiltered: boolean = false;
+  private filterOptions: FilterOptions = initialFilterOptions;
+  public filteredTodoList: TodoItem[] = [];
+  public isLoading: boolean = false;
 
   constructor(
     private todoService: TodoService,
@@ -36,14 +37,23 @@ export class TodoListComponent implements OnInit {
   }
 
   getTodoList() {
-    this.todoService.loadTodoList().subscribe((data) => {
-      this.todoList = data.todoList;
-      this.cdr.detectChanges();
-    });
+    this.isLoading = true;
+    this.todoService
+      .loadTodoList()
+      .subscribe({
+        next: (response: any) => {
+          this.todoList = response.todoList;
+          this.todoService.todoList = this.todoList;
+        },
+      })
+      .add(() => {
+        this.isLoading = false;
+        this.cdr.detectChanges();
+      });
   }
 
-  deleteTodo(todo: TodoItem): void {
-    this.todoService.deleteTodoItem(todo);
+  addTodo(todo: TodoItem): void {
+    this.todoService.addTodoItem(todo);
 
     if (this.isFiltered) {
       this.filteredTodoList = this.todoService.getfilteredTodoItems(
@@ -52,8 +62,8 @@ export class TodoListComponent implements OnInit {
     }
   }
 
-  addTodo(todo: TodoItem): void {
-    this.todoService.addTodoItem(todo);
+  deleteTodo(todo: TodoItem): void {
+    this.todoService.deleteTodoItem(todo);
 
     if (this.isFiltered) {
       this.filteredTodoList = this.todoService.getfilteredTodoItems(
