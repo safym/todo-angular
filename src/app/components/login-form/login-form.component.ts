@@ -14,6 +14,7 @@ import { AuthService } from "src/app/services/auth.service";
 export class LoginFormComponent {
   public email: string;
   public password: string;
+  public isLoading: boolean = false;
   public errorMessage: string | null;
 
   constructor(
@@ -32,17 +33,24 @@ export class LoginFormComponent {
   }
 
   login(email: string, password: string) {
-    console.log(`form submit! email: ${email} password: ${password}`);
-    this.authService.login(email, password).subscribe({
-      next: (response) => {
-        const token = response.token;
-        this.authService.setAuthToken(token);
-        this.router.navigate(["/todo"]);
-      },
-      error: (error) => {
-        this.errorMessage = error.error[0] || error.error.message;
+    this.isLoading = true;
+    this.authService
+      .login(email, password)
+      .subscribe({
+        next: (response) => {
+          const token = response.token;
+          this.authService.setAuthToken(token);
+        },
+        error: (error) => {
+          this.errorMessage = error.error[0] || error.error.message;
+        },
+        complete: () => {
+          this.router.navigate(["/todo"]);
+        },
+      })
+      .add(() => {
+        this.isLoading = false;
         this.cdr.detectChanges();
-      },
-    });
+      });
   }
 }
