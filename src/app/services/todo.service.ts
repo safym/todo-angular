@@ -54,7 +54,7 @@ export class TodoService {
       const matchSearch = item.title
         .toLowerCase()
         .includes(titleSubstring.toLowerCase());
-      const matchStatus = item.status === status;
+      const matchStatus = (status) ? item.status === status : true;
 
       return matchSearch && matchStatus;
     });
