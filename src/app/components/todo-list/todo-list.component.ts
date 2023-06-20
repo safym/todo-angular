@@ -7,7 +7,7 @@ import { TodoItem } from "src/app/models/todo";
 export const initialFilterOptions: FilterOptions = {
   titleSubstring: "",
   status: null,
-}
+};
 
 @Component({
   selector: "app-todo-list",
@@ -24,14 +24,16 @@ export class TodoListComponent implements OnInit {
   constructor(private todoService: TodoService) {}
 
   ngOnInit(): void {
-    this.todoList = this.todoService.getTodoItems();
+    this.todoList = this.todoService.todoList;
   }
 
   deleteTodo(todo: TodoItem): void {
     this.todoService.deleteTodoItem(todo);
-    
+
     if (this.isFiltered) {
-      this.filteredTodoList = this.todoService.getfilteredTodoItems(this.filterOptions);
+      this.filteredTodoList = this.todoService.getfilteredTodoItems(
+        this.filterOptions
+      );
     }
   }
 
@@ -39,7 +41,9 @@ export class TodoListComponent implements OnInit {
     this.todoService.addTodoItem(todo);
 
     if (this.isFiltered) {
-      this.filteredTodoList = this.todoService.getfilteredTodoItems(this.filterOptions);
+      this.filteredTodoList = this.todoService.getfilteredTodoItems(
+        this.filterOptions
+      );
     }
   }
 
@@ -49,14 +53,15 @@ export class TodoListComponent implements OnInit {
 
   getfilteredTodoItems(filterOptions: FilterOptions): void {
     this.filterOptions = filterOptions;
-    this.filteredTodoList = this.todoService.getfilteredTodoItems(filterOptions);
+    this.filteredTodoList =
+      this.todoService.getfilteredTodoItems(filterOptions);
     this.isFiltered = true;
   }
 
   resetFilter() {
-    console.log(this.filterOptions)
+    console.log(this.filterOptions);
     this.filterOptions = initialFilterOptions;
-    console.log(this.filterOptions)
+    console.log(this.filterOptions);
     this.isFiltered = false;
   }
 }

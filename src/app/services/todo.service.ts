@@ -7,7 +7,7 @@ import { FilterOptions } from "../components/filter-form/filter-form.component";
   providedIn: "root",
 })
 export class TodoService {
-  private todoList: TodoItem[] = [
+  private _todoList: TodoItem[] = [
     {
       id: 1,
       title: "first todo",
@@ -25,15 +25,15 @@ export class TodoService {
     },
   ];
 
-  getTodoItems(): TodoItem[] {
-    return this.todoList;
+  get todoList(): TodoItem[] {
+    return this._todoList;
   }
 
   deleteTodoItem(item: TodoItem) {
-    const todoIndex = this.todoList.indexOf(item);
+    const todoIndex = this._todoList.indexOf(item);
 
     if (todoIndex !== -1) {
-      this.deleteArrayItem(this.todoList as [], todoIndex);
+      this.deleteArrayItem(this._todoList as [], todoIndex);
     }
   }
 
@@ -42,7 +42,7 @@ export class TodoService {
   }
 
   addTodoItem(item: TodoItem) {
-    this.todoList.push(item);
+    this._todoList.push(item);
   }
 
   updateStatusTodoItem(item: TodoItem, newStatus: Status): void {
@@ -50,7 +50,7 @@ export class TodoService {
   }
 
   getfilteredTodoItems({titleSubstring, status}: FilterOptions): TodoItem[] {
-    const filteredTodoItems: TodoItem[] = this.todoList.filter((item) => {
+    const filteredTodoItems: TodoItem[] = this._todoList.filter((item) => {
       const matchSearch = item.title
         .toLowerCase()
         .includes(titleSubstring.toLowerCase());
