@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { TodoService } from "src/app/services/todo.service";
 import { updateStatusArgs } from "../todo-item/todo-item.component";
 import { FilterOptions } from "../filter-form/filter-form.component";
@@ -21,10 +21,20 @@ export class TodoListComponent implements OnInit {
   filterOptions: FilterOptions = initialFilterOptions;
   filteredTodoList: TodoItem[] = [];
 
-  constructor(private todoService: TodoService) {}
+  constructor(
+    private todoService: TodoService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
-    this.todoList = this.todoService.todoList;
+    this.getTodoList();
+  }
+
+  getTodoList() {
+    this.todoService.loadTodoList().subscribe((data) => {
+      this.todoList = data.todoList;
+      this.cdr.detectChanges();
+    });
   }
 
   deleteTodo(todo: TodoItem): void {

@@ -2,31 +2,27 @@ import { Injectable } from "@angular/core";
 import { Status, Todo } from "../models/todo.interface";
 import { TodoItem } from "../models/todo";
 import { FilterOptions } from "../components/filter-form/filter-form.component";
+import { Observable } from "rxjs";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root",
 })
 export class TodoService {
-  private _todoList: TodoItem[] = [
-    {
-      id: 1,
-      title: "first todo",
-      status: "normal",
-    },
-    {
-      id: 2,
-      title: "second todo",
-      status: "important",
-    },
-    {
-      id: 3,
-      title: "third todo",
-      status: "completed",
-    },
-  ];
+  private _todoList: TodoItem[] = [];
+
+  constructor(private http: HttpClient) {}
 
   get todoList(): TodoItem[] {
     return this._todoList;
+  }
+
+  loadTodoList(): Observable<any> {
+    const headers = new HttpHeaders().set("Content-Type", "application/json");
+
+    return this.http.get(`/assets/data/todo.json`, {
+      headers,
+    });
   }
 
   deleteTodoItem(item: TodoItem) {
@@ -49,12 +45,12 @@ export class TodoService {
     item.status = newStatus;
   }
 
-  getfilteredTodoItems({titleSubstring, status}: FilterOptions): TodoItem[] {
+  getfilteredTodoItems({ titleSubstring, status }: FilterOptions): TodoItem[] {
     const filteredTodoItems: TodoItem[] = this._todoList.filter((item) => {
       const matchSearch = item.title
         .toLowerCase()
         .includes(titleSubstring.toLowerCase());
-      const matchStatus = (status) ? item.status === status : true;
+      const matchStatus = status ? item.status === status : true;
 
       return matchSearch && matchStatus;
     });
