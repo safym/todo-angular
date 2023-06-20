@@ -23,16 +23,16 @@ export class LoginFormComponent {
     private router: Router
   ) {}
 
-  onSubmit() {
+  public onSubmit() {
     this.login(this.email, this.password);
   }
 
-  onInput() {
+  public onInput() {
     this.errorMessage = null;
     this.cdr.detectChanges();
   }
 
-  login(email: string, password: string) {
+  public login(email: string, password: string) {
     this.isLoading = true;
     this.authService
       .login(email, password)

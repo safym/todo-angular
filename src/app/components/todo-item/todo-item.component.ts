@@ -23,11 +23,11 @@ export class TodoItemComponent {
   @Output() deleteTodoEvent = new EventEmitter<TodoItem>();
   @Output() updateTodoEvent = new EventEmitter<updateStatusArgs>();
 
-  deleteTodo() {
+  public deleteTodo() {
     this.deleteTodoEvent.emit(this.todoItem);
   }
 
-  updateStatusTodo(e: any) {
+  public updateStatusTodo(e: any) {
     this.updateTodoEvent.emit({
       todo: this.todoItem,
       newStatus: e.target.value,

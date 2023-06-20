@@ -32,11 +32,11 @@ export class TodoListComponent implements OnInit {
     private cdr: ChangeDetectorRef
   ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.getTodoList();
   }
 
-  getTodoList() {
+  public getTodoList() {
     this.isLoading = true;
     this.todoService
       .loadTodoList()
@@ -52,7 +52,7 @@ export class TodoListComponent implements OnInit {
       });
   }
 
-  addTodo(todo: TodoItem): void {
+  public addTodo(todo: TodoItem): void {
     this.todoService.addTodoItem(todo);
 
     if (this.isFiltered) {
@@ -62,7 +62,7 @@ export class TodoListComponent implements OnInit {
     }
   }
 
-  deleteTodo(todo: TodoItem): void {
+  public deleteTodo(todo: TodoItem): void {
     this.todoService.deleteTodoItem(todo);
 
     if (this.isFiltered) {
@@ -72,18 +72,18 @@ export class TodoListComponent implements OnInit {
     }
   }
 
-  updateStatusTodo({ todo, newStatus }: updateStatusArgs): void {
+  public updateStatusTodo({ todo, newStatus }: updateStatusArgs): void {
     this.todoService.updateStatusTodoItem(todo, newStatus);
   }
 
-  getfilteredTodoItems(filterOptions: FilterOptions): void {
+  public getfilteredTodoItems(filterOptions: FilterOptions): void {
     this.filterOptions = filterOptions;
     this.filteredTodoList =
       this.todoService.getfilteredTodoItems(filterOptions);
     this.isFiltered = true;
   }
 
-  resetFilter() {
+  public resetFilter() {
     console.log(this.filterOptions);
     this.filterOptions = initialFilterOptions;
     console.log(this.filterOptions);

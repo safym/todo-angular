@@ -21,7 +21,7 @@ export class TodoService {
     this._todoList = todoList;
   }
 
-  loadTodoList() {
+  public loadTodoList() {
     const headers = new HttpHeaders().set("Content-Type", "application/json");
 
     return this.http.get(`/assets/data/todo.json`, {
@@ -29,7 +29,7 @@ export class TodoService {
     });
   }
 
-  deleteTodoItem(item: TodoItem) {
+  public deleteTodoItem(item: TodoItem) {
     const todoIndex = this._todoList.indexOf(item);
 
     if (todoIndex !== -1) {
@@ -41,15 +41,15 @@ export class TodoService {
     return array.splice(index, 1);
   }
 
-  addTodoItem(item: TodoItem) {
+  public addTodoItem(item: TodoItem) {
     this._todoList.push(item);
   }
 
-  updateStatusTodoItem(item: TodoItem, newStatus: Status): void {
+  public updateStatusTodoItem(item: TodoItem, newStatus: Status): void {
     item.status = newStatus;
   }
 
-  getfilteredTodoItems({ titleSubstring, status }: FilterOptions): TodoItem[] {
+  public getfilteredTodoItems({ titleSubstring, status }: FilterOptions): TodoItem[] {
     const filteredTodoItems: TodoItem[] = this._todoList.filter((item) => {
       const matchSearch = item.title
         .toLowerCase()
