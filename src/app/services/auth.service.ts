@@ -11,7 +11,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(email: string, password: string): Observable<any> {
+  public login(email: string, password: string): Observable<any> {
     const body = { email, password };
     const headers = new HttpHeaders().set("Content-Type", "application/json");
 
@@ -20,11 +20,19 @@ export class AuthService {
     });
   }
 
-  setAuthToken(token: string): void {
+  public logout() {
+    localStorage.removeItem(this.authTokenKey);
+  }
+
+  public setAuthToken(token: string): void {
     localStorage.setItem(this.authTokenKey, token);
   }
 
-  logout() {
-    localStorage.removeItem(this.authTokenKey);
+  public isLoggedIn(): boolean {
+    return !!this.getToken();
+  }
+
+  private getToken(): string | null {
+    return localStorage.getItem(this.authTokenKey);
   }
 }
