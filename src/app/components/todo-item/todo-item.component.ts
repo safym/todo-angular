@@ -5,8 +5,8 @@ import {
   EventEmitter,
   ChangeDetectionStrategy,
 } from "@angular/core";
-import { Status, Todo } from "src/app/models/todo.interface";
-import { TodoItem } from "src/app/models/todo";
+import { Status, Todo } from "src/app/models/todo/todo.interface";
+import { TodoItem } from "src/app/models/todo/todo";
 
 export interface updateStatusArgs {
   todo: TodoItem;

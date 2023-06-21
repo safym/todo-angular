@@ -4,8 +4,8 @@ import {
   EventEmitter,
   Output,
 } from "@angular/core";
-import { Status } from "src/app/models/todo.interface";
-import { TodoItem } from "src/app/models/todo";
+import { Status } from "src/app/models/todo/todo.interface";
+import { TodoItem } from "src/app/models/todo/todo";
 
 @Component({
   selector: "app-todo-form",

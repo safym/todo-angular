@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Status, Todo } from "../models/todo.interface";
-import { TodoItem } from "../models/todo";
+import { Status, Todo } from "../models/todo/todo.interface";
+import { TodoItem } from "../models/todo/todo";
 import { FilterOptions } from "../components/filter-form/filter-form.component";
 import { Observable } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";

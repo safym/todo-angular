@@ -7,7 +7,7 @@ import {
 import { TodoService } from "src/app/services/todo.service";
 import { updateStatusArgs } from "../todo-item/todo-item.component";
 import { FilterOptions } from "../filter-form/filter-form.component";
-import { TodoItem } from "src/app/models/todo";
+import { TodoItem } from "src/app/models/todo/todo";
 
 export const initialFilterOptions: FilterOptions = {
   titleSubstring: "",

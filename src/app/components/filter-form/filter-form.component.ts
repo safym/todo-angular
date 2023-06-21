@@ -4,7 +4,7 @@ import {
   EventEmitter,
   Output,
 } from "@angular/core";
-import { Status } from "src/app/models/todo.interface";
+import { Status } from "src/app/models/todo/todo.interface";
 
 export interface FilterOptions {
   titleSubstring: string;
