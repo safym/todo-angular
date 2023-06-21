@@ -16,6 +16,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { TodoPageComponent } from './pages/todo-page/todo-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AboutPageComponent } from './pages/about-page/about-page.component';
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { AboutPageComponent } from './pages/about-page/about-page.component';
     FilterFormComponent,
     TodoItemComponent,
     TodoListComponent,
+    NotFoundPageComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
