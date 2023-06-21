@@ -23,18 +23,18 @@ export class FilterFormComponent {
   @Output() filterTodoItemsEvent = new EventEmitter<FilterOptions>();
   @Output() resetFilterEvent = new EventEmitter<any>();
 
-  public changeStatus(e: any) {
+  changeStatus(e: any) {
     this.status = e.target.value;
   }
 
-  public onSubmit() {
+  onSubmit() {
     this.filterTodoItemsEvent.emit({
       titleSubstring: this.titleSubstring,
       status: this.status,
     });
   }
 
-  public onReset() {
+  onReset() {
     this.resetFilterEvent.emit();
     this.titleSubstring = "";
     this.status = null;

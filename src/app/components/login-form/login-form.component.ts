@@ -12,10 +12,10 @@ import { AuthService } from "src/app/services/auth.service";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginFormComponent {
-  public email: string;
-  public password: string;
-  public isLoading: boolean = false;
-  public errorMessage: string | null;
+  email: string;
+  password: string;
+  isLoading: boolean = false;
+  errorMessage: string | null;
 
   constructor(
     private authService: AuthService,
@@ -23,16 +23,16 @@ export class LoginFormComponent {
     private router: Router
   ) {}
 
-  public onSubmit() {
+  onSubmit(): void {
     this.login(this.email, this.password);
   }
 
-  public onInput() {
+  onInput(): void {
     this.errorMessage = null;
     this.cdr.detectChanges();
   }
 
-  public login(email: string, password: string) {
+  login(email: string, password: string): void {
     this.isLoading = true;
     this.authService
       .login(email, password)

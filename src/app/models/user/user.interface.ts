@@ -9,7 +9,7 @@ export interface Role {
     userId: number;
     createdAt: string;
     updatedAt: string;
-  }
+  };
 }
 
 export interface IUser {

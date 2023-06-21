@@ -18,11 +18,12 @@ export class TodoFormComponent {
 
   @Output() addTodoEvent = new EventEmitter<TodoItem>();
 
-  changeStatus(e: any) {
-    this.status = e.target.value;
+  changeStatus(event: Event): void {
+    const target = event.target as HTMLSelectElement;
+    this.status = target.value as Status;
   }
 
-  onSubmit() {
+  onSubmit(): void {
     const newTodo = new TodoItem(Date.now(), this.title, this.status);
 
     this.addTodoEvent.emit(newTodo);

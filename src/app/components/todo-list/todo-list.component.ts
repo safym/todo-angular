@@ -21,22 +21,23 @@ export const initialFilterOptions: FilterOptions = {
   providers: [TodoService],
 })
 export class TodoListComponent implements OnInit {
-  public todoList: TodoItem[] = [];
-  public isFiltered: boolean = false;
+  todoList: TodoItem[] = [];
+  isFiltered: boolean = false;
+
   private filterOptions: FilterOptions = initialFilterOptions;
-  public filteredTodoList: TodoItem[] = [];
-  public isLoading: boolean = false;
+  filteredTodoList: TodoItem[] = [];
+  isLoading: boolean = false;
 
   constructor(
     private todoService: TodoService,
     private cdr: ChangeDetectorRef
   ) {}
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     this.getTodoList();
   }
 
-  public getTodoList() {
+  getTodoList(): void {
     this.isLoading = true;
     this.todoService
       .loadTodoList()
@@ -52,7 +53,7 @@ export class TodoListComponent implements OnInit {
       });
   }
 
-  public addTodo(todo: TodoItem): void {
+  addTodo(todo: TodoItem): void {
     this.todoService.addTodoItem(todo);
 
     if (this.isFiltered) {
@@ -62,7 +63,7 @@ export class TodoListComponent implements OnInit {
     }
   }
 
-  public deleteTodo(todo: TodoItem): void {
+  deleteTodo(todo: TodoItem): void {
     this.todoService.deleteTodoItem(todo);
 
     if (this.isFiltered) {
@@ -72,18 +73,18 @@ export class TodoListComponent implements OnInit {
     }
   }
 
-  public updateStatusTodo({ todo, newStatus }: updateStatusArgs): void {
+  updateStatusTodo({ todo, newStatus }: updateStatusArgs): void {
     this.todoService.updateStatusTodoItem(todo, newStatus);
   }
 
-  public getfilteredTodoItems(filterOptions: FilterOptions): void {
+  getfilteredTodoItems(filterOptions: FilterOptions): void {
     this.filterOptions = filterOptions;
     this.filteredTodoList =
       this.todoService.getfilteredTodoItems(filterOptions);
     this.isFiltered = true;
   }
 
-  public resetFilter() {
+  resetFilter(): void {
     console.log(this.filterOptions);
     this.filterOptions = initialFilterOptions;
     console.log(this.filterOptions);

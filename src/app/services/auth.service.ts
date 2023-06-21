@@ -6,6 +6,10 @@ import { environment } from "src/environments/environment";
 import { User } from "../models/user/user";
 import { IUser } from "../models/user/user.interface";
 
+interface Response {
+  token: string;
+}
+
 @Injectable({
   providedIn: "root",
 })
@@ -15,7 +19,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  public get user() {
+  get user(): User | null {
     const token = this.getToken();
 
     if (token) {
@@ -28,25 +32,25 @@ export class AuthService {
     }
   }
 
-  public login(email: string, password: string): Observable<any> {
+  login(email: string, password: string): Observable<Response> {
     const body = { email, password };
     const headers = new HttpHeaders().set("Content-Type", "application/json");
 
-    return this.http.post(`${environment.baseUrl}/auth/login`, body, {
+    return this.http.post<Response>(`${environment.baseUrl}/auth/login`, body, {
       headers,
     });
   }
 
-  public logout() {
+  logout(): void {
     localStorage.removeItem(this.authTokenKey);
     this._user = null;
   }
 
-  public setAuthToken(token: string): void {
+  setAuthToken(token: string): void {
     localStorage.setItem(this.authTokenKey, token);
   }
 
-  public isLoggedIn(): boolean {
+  isLoggedIn(): boolean {
     return !!this._user;
   }
 
@@ -54,7 +58,7 @@ export class AuthService {
     return localStorage.getItem(this.authTokenKey);
   }
 
-  private parseJwt(token: string) {
+  private parseJwt(token: string): IUser {
     let base64Url = token.split(".")[1];
     let base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
     let jsonPayload = decodeURIComponent(

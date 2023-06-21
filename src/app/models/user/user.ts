@@ -1,11 +1,11 @@
 import { IUser, Role } from "./user.interface";
 
 export class User implements IUser {
-  public id: number;
-  public iat: number;
-  public exp: number;
-  public email: string;
-  public roles: Role[];
+  id: number;
+  iat: number;
+  exp: number;
+  email: string;
+  roles: Role[];
 
   constructor({ id, iat, exp, email, roles }: IUser) {
     this.id = id;

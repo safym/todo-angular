@@ -5,6 +5,10 @@ import { FilterOptions } from "../components/filter-form/filter-form.component";
 import { Observable } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 
+interface JsonData {
+  todoItems: TodoItem[];
+}
+
 @Injectable({
   providedIn: "root",
 })
@@ -21,15 +25,15 @@ export class TodoService {
     this._todoList = todoList;
   }
 
-  public loadTodoList() {
+  loadTodoList(): Observable<JsonData> {
     const headers = new HttpHeaders().set("Content-Type", "application/json");
 
-    return this.http.get(`/assets/data/todo.json`, {
+    return this.http.get<JsonData>(`/assets/data/todo.json`, {
       headers,
     });
   }
 
-  public deleteTodoItem(item: TodoItem) {
+  deleteTodoItem(item: TodoItem): void {
     const todoIndex = this._todoList.indexOf(item);
 
     if (todoIndex !== -1) {
@@ -37,19 +41,19 @@ export class TodoService {
     }
   }
 
-  private deleteArrayItem(array: [], index: number) {
+  private deleteArrayItem(array: [], index: number): TodoItem[] {
     return array.splice(index, 1);
   }
 
-  public addTodoItem(item: TodoItem) {
+  addTodoItem(item: TodoItem): void {
     this._todoList.push(item);
   }
 
-  public updateStatusTodoItem(item: TodoItem, newStatus: Status): void {
+  updateStatusTodoItem(item: TodoItem, newStatus: Status): void {
     item.status = newStatus;
   }
 
-  public getfilteredTodoItems({ titleSubstring, status }: FilterOptions): TodoItem[] {
+  getfilteredTodoItems({ titleSubstring, status }: FilterOptions): TodoItem[] {
     const filteredTodoItems: TodoItem[] = this._todoList.filter((item) => {
       const matchSearch = item.title
         .toLowerCase()

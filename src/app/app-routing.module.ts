@@ -10,8 +10,8 @@ import { AuthGuard } from "./guards/auth.guard";
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
   { path: "login", component: LoginPageComponent },
-  { path: "about", component: AboutPageComponent},
-  { path: "todo", component: TodoPageComponent, canActivate: [AuthGuard]},
+  { path: "about", component: AboutPageComponent },
+  { path: "todo", component: TodoPageComponent, canActivate: [AuthGuard] },
   { path: "404", component: NotFoundPageComponent },
   { path: "**", redirectTo: "/404" },
 ];
@@ -19,6 +19,5 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  declarations: [],
 })
 export class AppRoutingModule {}
