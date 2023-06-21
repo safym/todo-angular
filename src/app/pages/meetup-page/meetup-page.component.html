@@ -1,0 +1,12 @@
+<div class="flex flex-col gap-4 min-w-xl max-w-3xl align-center">
+  <h1 class="my-4 text-center">Interceptor test page</h1>
+  <a
+    (click)="onClick()"
+    class="block w-full text-m px-6 py-2 text-center rounded-md text-indigo-300 text-white border-indigo-400 bg-indigo-400 hover:text-white hover:bg-indigo-300"
+    >Get meetups</a
+  >
+  <h1 class="text-center">Result:</h1>
+  <p class="text-s">
+    {{ result | json }}
+  </p>
+</div>
