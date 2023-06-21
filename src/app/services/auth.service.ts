@@ -54,7 +54,7 @@ export class AuthService {
     return !!this._user;
   }
 
-  private getToken(): string | null {
+  getToken(): string | null {
     return localStorage.getItem(this.authTokenKey);
   }
 
