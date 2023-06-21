@@ -11,6 +11,16 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  public get user() {
+    const token = this.getToken();
+
+    if (token) {
+      return this.parseJwt(token);
+    } else {
+      return null;
+    }
+  }
+
   public login(email: string, password: string): Observable<any> {
     const body = { email, password };
     const headers = new HttpHeaders().set("Content-Type", "application/json");
@@ -29,10 +39,25 @@ export class AuthService {
   }
 
   public isLoggedIn(): boolean {
-    return !!this.getToken();
+    return this.user;
   }
 
   private getToken(): string | null {
     return localStorage.getItem(this.authTokenKey);
+  }
+
+  private parseJwt(token: string) {
+    let base64Url = token.split(".")[1];
+    let base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    let jsonPayload = decodeURIComponent(
+      window
+        .atob(base64)
+        .split("")
+        .map(function (c) {
+          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join("")
+    );
+    return JSON.parse(jsonPayload);
   }
 }
