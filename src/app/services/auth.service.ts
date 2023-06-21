@@ -1,13 +1,17 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
+
 import { environment } from "src/environments/environment";
+import { User } from "../models/user/user";
+import { IUser } from "../models/user/user.interface";
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthService {
   private authTokenKey = "auth_token";
+  private _user: User | null = null;
 
   constructor(private http: HttpClient) {}
 
@@ -15,7 +19,10 @@ export class AuthService {
     const token = this.getToken();
 
     if (token) {
-      return this.parseJwt(token);
+      const userData: IUser = this.parseJwt(token);
+      this._user = new User(userData);
+
+      return this._user;
     } else {
       return null;
     }
@@ -32,6 +39,7 @@ export class AuthService {
 
   public logout() {
     localStorage.removeItem(this.authTokenKey);
+    this._user = null;
   }
 
   public setAuthToken(token: string): void {
@@ -39,7 +47,7 @@ export class AuthService {
   }
 
   public isLoggedIn(): boolean {
-    return this.user;
+    return !!this._user;
   }
 
   private getToken(): string | null {
