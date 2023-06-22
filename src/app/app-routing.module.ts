@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: "login", component: LoginPageComponent },
   { path: "about", component: AboutPageComponent },
   { path: "todo", component: TodoPageComponent, canActivate: [AuthGuard] },
-  { path: "user", component: MeetupPageComponent, canActivate: [AuthGuard] },
+  { path: "meetup", component: MeetupPageComponent, canActivate: [AuthGuard] },
   { path: "404", component: NotFoundPageComponent },
   { path: "**", redirectTo: "/404" },
 ];
